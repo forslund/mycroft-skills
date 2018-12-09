@@ -154,3 +154,6 @@
 [submodule "wikiquote"]
 	path = wikiquote
 	url = https://github.com/danielwine/wikiquote-skill
+[submodule "fallback-recommendations-skill"]
+	path = fallback-recommendations-skill
+	url = https://github.com/LinusS1/fallback-recommendations-skill
