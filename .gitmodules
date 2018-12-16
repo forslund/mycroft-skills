@@ -154,3 +154,6 @@
 [submodule "wikiquote"]
 	path = wikiquote
 	url = https://github.com/danielwine/wikiquote-skill
+[submodule "kodi"]
+	path = kodi
+	url = https://github.com/pcwii/kodi-skill.git
