@@ -172,3 +172,6 @@
 [submodule "remember"]
 	path = remember
 	url = https://github.com/luke5sky/remember-skill.git
+[submodule "fairytalez"]
+	path = fairytalez
+	url = https://github.com/andlo/fairytalez-skill.git
