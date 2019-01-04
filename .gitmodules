@@ -175,3 +175,6 @@
 [submodule "count"]
 	path = count
 	url = https://github.com/andlo/count-skill.git
+[submodule "speedtest"]
+	path = speedtest
+	url = https://github.com/luke5sky/speedtest-skill.git
