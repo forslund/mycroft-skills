@@ -193,3 +193,6 @@
 [submodule "pick-number"]
 	path = pick-number
 	url = https://github.com/pcwii/skill-pick-number.git
+[submodule "mattermost"]
+	path = mattermost
+	url = https://github.com/domcross/mattermost-for-mycroft-skill.git
