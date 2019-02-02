@@ -196,3 +196,6 @@
 [submodule "fallback-query"]
 	path = fallback-query
 	url = https://github.com/MycroftAI/skill-query.git
+[submodule "mycroft-chat"]
+	path = mycroft-chat
+	url = https://github.com/domcross/mycroft-chat-skill.git
