@@ -211,3 +211,6 @@
 [submodule "mycroft-mark-2"]
 	path = mycroft-mark-2
 	url = https://github.com/mycroftai/skill-mark-2
+[submodule "moviemaster"]
+	path = moviemaster
+	url = https://github.com/builderjer/tmdb-skill.git
