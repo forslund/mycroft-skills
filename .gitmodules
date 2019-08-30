@@ -235,3 +235,6 @@
 [submodule "today-in-history"]
 	path = today-in-history
 	url = https://github.com/austin-carnahan/days-in-history-skill
+[submodule "mozilla-webthings-gateway-skill"]
+	path = mozilla-webthings-gateway-skill
+	url = https://github.com/mozilla-iot/mozilla-webthings-gateway-skill
