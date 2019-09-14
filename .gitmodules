@@ -232,3 +232,6 @@
 [submodule "today-in-history"]
 	path = today-in-history
 	url = https://github.com/austin-carnahan/days-in-history-skill
+[submodule "MBTA-Bus-Tracking"]
+	path = MBTA-Bus-Tracking
+	url = https://github.com/richhowley/mbta-bus-tracking-skill
