@@ -235,3 +235,6 @@
 [submodule "openhab-skill"]
 	path = openhab-skill
 	url = https://github.com/mortommy/openhab-mycroft
+[submodule "web-terminal"]
+	path = web-terminal
+	url = https://github.com/andlo/web-ssh-skill
