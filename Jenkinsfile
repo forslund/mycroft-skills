@@ -27,10 +27,13 @@ pipeline {
                 ).trim()
             }
             steps {
+                sh 'GIT URL'
+                sh 'echo $GIT_URL'
                 sh 'docker build \
                     --build-arg major_release=20.02 \
                     --build-arg platform=mycroft_mark_1 \
                     --build-arg pull_request=$BRANCH_NAME \
+                    --build-arg pull_repo=$GIT_URL \
                     --build-arg branch_name=$CHANGE_BRANCH \
                     --build-arg github_api_key=$GITHUB_PSW \
                     --no-cache \
