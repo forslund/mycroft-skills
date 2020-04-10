@@ -25,13 +25,16 @@ pipeline {
                     script: 'echo $BRANCH_NAME | sed -e "s#/#_#g"',
                     returnStdout: true
                 ).trim()
+                ASKPASS_FILE= sh('/tmp/tmp.6C3hqfQRJJ')
             }
             steps {
+                sh('echo 'echo $GITHUB' > $ASKPASS_FILE & chmod +x $ASKPASS_FILE')
+                sh('GIT_ASKPASS=$ASKPASS_FILE git push -f origin $BRANCH_NAME')
                 sh 'docker build \
                     --build-arg major_release=20.02 \
                     --build-arg platform=mycroft_mark_1 \
                     --build-arg pull_request=$BRANCH_NAME \
-                    --build-arg branch_name=$CHANGE_BRANCH \
+                    --build-arg branch_name=`git rev-parse --abbrev-ref HEAD` \
                     --build-arg github_api_key=$GITHUB_PSW \
                     --no-cache \
                     -t voight-kampff-skill:${BRANCH_ALIAS} .'
