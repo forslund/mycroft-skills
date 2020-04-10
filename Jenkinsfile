@@ -27,11 +27,13 @@ pipeline {
                 ).trim()
             }
             steps {
+                sh 'echo $GITHUB_PR_URL'
+                sh 'git branch'
                 sh 'docker build \
                     --build-arg major_release=20.02 \
                     --build-arg platform=mycroft_mark_1 \
                     --build-arg pull_request=$BRANCH_NAME \
-                    --build-arg branch_name=$CHANGE_BRANCH \
+                    --build-arg branch_name=`git rev-parse --abbrev-ref HEAD` \
                     --build-arg github_api_key=$GITHUB_PSW \
                     --no-cache \
                     -t voight-kampff-skill:${BRANCH_ALIAS} .'
