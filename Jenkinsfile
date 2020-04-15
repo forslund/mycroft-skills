@@ -1,3 +1,5 @@
+def report_created = false
+
 pipeline {
     agent any
     options {
@@ -48,7 +50,9 @@ pipeline {
                     //    voight-kampff-skill:${BRANCH_ALIAS} \
                     //    -f allure_behave.formatter:AllureFormatter \
                     //    -o /root/allure/allure-result --tags ~@xfail'
-                    sh 'export REPORT_CREATED=true'
+                    script {
+                        report_created = true
+                    }
                 }
             }
             post {
@@ -93,7 +97,7 @@ pipeline {
                         def report_url = 'https://reports.mycroft.ai/skills/' + env.BRANCH_ALIAS
                         if (env.CHANGE_ID) {
                             
-                            if (env.ALLURE_PUBLISHED == 'true') {
+                            if (report_created) {
                                 pr_info = 'Voight Kampff Integration Test Failed ([Results](' + report_url + '))'
                             }
                             else {
