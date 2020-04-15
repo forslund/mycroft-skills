@@ -1,3 +1,5 @@
+def report_created = false
+
 pipeline {
     agent any
     options {
@@ -82,15 +84,28 @@ pipeline {
                             ssh root@157.245.127.234 "mv allure-report /var/www/voight-kampff/skills/${BRANCH_ALIAS}"
                         '''
                     )
+                    // The following will only be run if the report was uploaded
+                    script {
+                        report_created = true
+                    }
                     echo 'Report Published'
                 }
                 failure {
                     // Send allure report to Pull request
                     script {
                         // Create comment for Pull Requests
+                        def pr_info = ''
+                        def report_url = 'https://reports.mycroft.ai/skills/' + env.BRANCH_ALIAS
                         if (env.CHANGE_ID) {
-                            echo 'Sending PR comment'
-                            pullRequest.comment('Voight Kampff Integration Test Failed ([Results](https://reports.mycroft.ai/skills/' + env.BRANCH_ALIAS + '))')
+                            
+                            if (report_created) {
+                                pr_info = 'Voight Kampff Integration Test Failed ([Results](' + report_url + '))'
+                            }
+                            else {
+                                pr_info = 'Voight Kampff Integration Test Failed and no report was generated. A manual check will follow.'
+                            }
+                            echo 'Sending PR comment:\n' + pr_info
+                            pullRequest.comment(pr_info)
                         }
                     }
                     // Send failure email containing a link to the Jenkins build
