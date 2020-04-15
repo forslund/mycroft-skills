@@ -50,10 +50,6 @@ pipeline {
                     //    voight-kampff-skill:${BRANCH_ALIAS} \
                     //    -f allure_behave.formatter:AllureFormatter \
                     //    -o /root/allure/allure-result --tags ~@xfail'
-                    sh 'asdfqqqqq'
-                    script {
-                        report_created = true
-                    }
                 }
             }
             post {
@@ -88,6 +84,10 @@ pipeline {
                             ssh root@157.245.127.234 "mv allure-report /var/www/voight-kampff/skills/${BRANCH_ALIAS}"
                         '''
                     )
+                    script {
+                        report_created = true
+                    }
+
                     echo 'Report Published'
                 }
                 failure {
