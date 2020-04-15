@@ -88,9 +88,21 @@ pipeline {
                     // Send allure report to Pull request
                     script {
                         // Create comment for Pull Requests
+                        def pr_info = ''
+                        def report_url = 'https://reports.mycroft.ai/skills/' + env.BRANCH_ALIAS
                         if (env.CHANGE_ID) {
+                            
+                            def report_status = sh(returnStatus: true,
+                                script: 'curl -I ' + report_url +
+                                        ' | grep -q "HTTP.*200 OK"')
+                            if (report_status == 0) {
+                                pr_info = 'Voight Kampff Integration Test Failed ([Results](' + report_url + '))'
+                            }
+                            else {
+                                pr_info = 'Voight Kampff Integration Test Failed and no report was generated. A manual check will follow.'
+                            }
                             echo 'Sending PR comment'
-                            pullRequest.comment('Voight Kampff Integration Test Failed ([Results](https://reports.mycroft.ai/skills/' + env.BRANCH_ALIAS + '))')
+                            pullRequest.comment(pr_info)
                         }
                     }
                     // Send failure email containing a link to the Jenkins build
