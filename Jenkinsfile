@@ -50,6 +50,7 @@ pipeline {
                     //    voight-kampff-skill:${BRANCH_ALIAS} \
                     //    -f allure_behave.formatter:AllureFormatter \
                     //    -o /root/allure/allure-result --tags ~@xfail'
+                    sh 'asdfqqqqq'
                     script {
                         report_created = true
                     }
