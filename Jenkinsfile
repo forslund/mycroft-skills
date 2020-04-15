@@ -91,9 +91,11 @@ pipeline {
                         def pr_info = ''
                         def report_url = 'https://reports.mycroft.ai/skills/' + env.BRANCH_ALIAS
                         if (env.CHANGE_ID) {
-                            def report_ok = sh('curl -I ' + report_url +
-                                               '| grep -q "HTTP.*200 OK"')
-                            if (report_ok) {
+                            
+                            def report_status = sh(returnStatus: true,
+                                script: 'curl -I ' + report_url +
+                                        ' | grep -q "HTTP.*200 OK"')
+                            if (report_status == 0) {
                                 pr_info = 'Voight Kampff Integration Test Failed ([Results](' + report_url + '))'
                             }
                             else {
