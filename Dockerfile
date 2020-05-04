@@ -21,6 +21,11 @@ FROM config_builder as test_setup
 ARG platform
 ARG branch_name
 ARG repo_url
+# Load updated test cases for default skills
+RUN python -m test.integrationtests.voight_kampff.test_setup \
+    --config default.yml \
+    --platform $platform
+# Load test cases for skill to test
 RUN python -m test.integrationtests.voight_kampff.test_setup \
     --config test_skill.yml \
     --platform $platform \
