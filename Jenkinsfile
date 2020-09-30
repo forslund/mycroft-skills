@@ -56,6 +56,7 @@ pipeline {
                     echo 'Changing ownership...'
                     sh 'docker run \
                         --volume "$HOME/allure/skills/:/root/allure" \
+                        --volume "/var/log/mycroft/:/root/mycroft-logs \
                         --entrypoint=/bin/bash \
                         voight-kampff-skill:${BRANCH_ALIAS} \
                         -x -c "chown $(id -u $USER):$(id -g $USER) \
@@ -74,12 +75,17 @@ pipeline {
                         ])
                     }
                     unarchive mapping:['allure-report.zip': 'allure-report.zip']
+                    sh 'zip mycroft-logs.zip -r /root/mycroft-logs'
+                    sh 'rm /root/mycroft-logs/*'
                     sh (
                         label: 'Publish Report to Web Server',
                         script: '''scp allure-report.zip root@157.245.127.234:~;
                             ssh root@157.245.127.234 "unzip -o ~/allure-report.zip";
                             ssh root@157.245.127.234 "rm -rf /var/www/voight-kampff/skills/${BRANCH_ALIAS}";
                             ssh root@157.245.127.234 "mv allure-report /var/www/voight-kampff/skills/${BRANCH_ALIAS}"
+                            scp mycroft-logs.zip root@157.245.127.234:~;
+                            ssh root@157.245.127.234 "unzip -o ~/mycroft-logs.zip";
+                            ssh root@157.245.127.234 "mv mycroft-logs /var/www/voight-kampff/core/${BRANCH_ALIAS}/logs"
                         '''
                     )
                     echo 'Report Published'
